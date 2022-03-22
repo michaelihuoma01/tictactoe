@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tictactoe_test/helpers/helperMethods.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -8,6 +9,33 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isX = true;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      HelperMethods.initialize();
+    });
+  }
+
+  void playGame(int index) {
+    if (HelperMethods.gameState[index] == 'empty') {
+      setState(() {
+        if (isX) {
+          HelperMethods.gameState[index] = 'X';
+        } else {
+          HelperMethods.gameState[index] = 'O';
+        }
+        isX = !isX;
+        setState(() {
+          HelperMethods.checkResult(context, index);
+        });
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,6 +44,18 @@ class _HomeScreenState extends State<HomeScreen> {
           'Tic-Tac Toe',
           style: TextStyle(fontSize: 25.0),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: InkWell(
+                onTap: () {
+                  setState(() {
+                    HelperMethods.resetGame();
+                  });
+                },
+                child: const Icon(Icons.refresh, size: 30)),
+          )
+        ],
       ),
       body: Column(
         children: [
@@ -37,9 +77,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: MaterialButton(
                   onPressed: () {
-                    print('-------tapped');
+                    playGame(i);
                   },
-                  child: Icon(Icons.clear, color: Colors.red, size: 50),
+                  child: HelperMethods.getImage(HelperMethods.gameState[i]),
                 ),
               ),
             ),
