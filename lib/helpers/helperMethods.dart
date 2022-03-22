@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tictactoe_test/widgets/scoreDialog.dart';
 
 class HelperMethods {
   static List<String> gameState = [];
+  static String? winnerIndex;
   static initialize() {
     gameState = [
       "empty",
@@ -34,53 +36,95 @@ class HelperMethods {
     if ((gameState[0] != 'empty') &&
         (gameState[0] == gameState[1]) &&
         (gameState[1] == gameState[2])) {
-      print('---------${gameState[0]} Wins');
+      winnerIndex = gameState[0];
+
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => WinnerDialog(winner: winnerIndex));
       resetGame();
     } else if ((gameState[3] != 'empty') &&
         (gameState[3] == gameState[4]) &&
         (gameState[4] == gameState[5])) {
-      print('---------${gameState[3]} Wins');
+      winnerIndex = gameState[3];
+
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => WinnerDialog(winner: winnerIndex));
 
       resetGame();
     } else if ((gameState[6] != 'empty') &&
         (gameState[6] == gameState[7]) &&
         (gameState[7] == gameState[8])) {
-      print('---------${gameState[6]} Wins');
+      winnerIndex = gameState[6];
+
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => WinnerDialog(winner: winnerIndex));
 
       resetGame();
     } else if ((gameState[0] != 'empty') &&
         (gameState[0] == gameState[3]) &&
         (gameState[3] == gameState[6])) {
-      print('---------${gameState[0]} Wins');
+      winnerIndex = gameState[0];
+
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => WinnerDialog(winner: winnerIndex));
 
       resetGame();
     } else if ((gameState[1] != 'empty') &&
         (gameState[1] == gameState[4]) &&
         (gameState[4] == gameState[7])) {
-      print('---------${gameState[1]} Wins');
+      winnerIndex = gameState[1];
+
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => WinnerDialog(winner: winnerIndex));
 
       resetGame();
     } else if ((gameState[2] != 'empty') &&
         (gameState[2] == gameState[5]) &&
         (gameState[5] == gameState[8])) {
-      print('---------${gameState[2]} Wins');
+      winnerIndex = gameState[2];
+
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => WinnerDialog(winner: winnerIndex));
 
       resetGame();
     } else if ((gameState[0] != 'empty') &&
         (gameState[0] == gameState[4]) &&
         (gameState[4] == gameState[8])) {
-      print('---------${gameState[0]} Wins');
+      winnerIndex = gameState[0];
+
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => WinnerDialog(winner: winnerIndex));
 
       resetGame();
     } else if ((gameState[2] != 'empty') &&
         (gameState[2] == gameState[4]) &&
         (gameState[4] == gameState[6])) {
-      print('---------${gameState[2]} Wins');
+      winnerIndex = gameState[2];
+
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => WinnerDialog(winner: winnerIndex));
 
       resetGame();
     } else if (!gameState.contains('empty')) {
-      print('---------Drawww');
-
+      showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext context) => DrawDialog());
       resetGame();
     }
   }

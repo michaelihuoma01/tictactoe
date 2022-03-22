@@ -11,6 +11,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool isX = true;
 
+  String? turn;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -29,9 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
           HelperMethods.gameState[index] = 'O';
         }
         isX = !isX;
-        setState(() {
-          HelperMethods.checkResult(context, index);
-        });
+
+        HelperMethods.checkResult(context, index);
       });
     }
   }
@@ -59,6 +60,14 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
+          Visibility(
+            visible: (turn == 'X' || turn == 'O'),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Text((turn == 'X') ? 'O turn' : 'X turn',
+                  style: TextStyle(fontSize: 20)),
+            ),
+          ),
           Expanded(
             child: GridView.builder(
               padding: const EdgeInsets.all(20.0),
@@ -78,6 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: MaterialButton(
                   onPressed: () {
                     playGame(i);
+                    turn = HelperMethods.gameState[i];
                   },
                   child: HelperMethods.getImage(HelperMethods.gameState[i]),
                 ),
